@@ -5,13 +5,12 @@ import connectToDB from "@/lib/connect";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 
-const getCategories = async () => {
+const getcategory = async () => {
+  const db = await connectToDB();
+  const collection = db.collection("categori");
 
-    const db = await connectToDB();
-    const collection = db.collection("categori");
-
-    const category = await collection.find({}).toArray();
-    return category;
+  const category = await collection.find({}).toArray();
+  return category;
 };
 
 const addCategory = async (FormData) => {
@@ -33,8 +32,9 @@ const addCategory = async (FormData) => {
       categoryObj.parentId = null;
     }
     const cate = await collection.insertOne(categoryObj);
+    console.log(cate);
     if (cate.acknowledged == true) {
-      revalidatePath("/");
+      revalidatePath("/add-new");
     }
   } catch (error) {
     return error.message;
@@ -42,10 +42,11 @@ const addCategory = async (FormData) => {
 };
 
 async function Page() {
-    const data = await getCategories();
+  const data = await getcategory();
 
   return (
     <div className="w-full fixed top-0 left-0 z-[999] bg-[#00000039] flex items-center justify-center h-screen">
+      <Link href="/dynamic/898874erw8e87887"> dynamic</Link>
       <Link href="/"> home</Link>
       <div className="w-[90%] md:w-[60%] min-h-[20vh] bg-white rounded shadow p-5">
         <div className="w-full flex justify-end cursor-pointer">
