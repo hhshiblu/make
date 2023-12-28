@@ -12,7 +12,7 @@ const getcategory = async () => {
   const category = await collection.find({}).toArray();
   return category;
 };
-
+export const dynamic = "force-dynamic";
 const addCategory = async (FormData) => {
   "use server";
   try {
