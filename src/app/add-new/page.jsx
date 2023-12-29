@@ -4,15 +4,8 @@ import SubmitButton from "@/component/sub";
 import connectToDB from "@/lib/connect";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import { getcategory } from "@/action/posrt";
 
-const getcategory = async () => {
-  const db = await connectToDB();
-  const collection = db.collection("categori");
-
-  const category = await collection.find({}).toArray();
-  return category;
-};
-export const dynamic = "force-dynamic";
 const addCategory = async (FormData) => {
   "use server";
   try {

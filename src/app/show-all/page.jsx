@@ -1,16 +1,6 @@
-import connectToDB from "@/lib/connect";
+import { getcategory } from "@/action/posrt";
 import Link from "next/link";
 import React from "react";
-
-const getcategory = async () => {
-  const db = await connectToDB();
-  const collection = db.collection("categori");
-
-  const category = await collection.find({}).toArray();
-  return category;
-};
-export const dynamic = "force-dynamic";
-
 async function Page() {
   const data = await getcategory();
   return (
