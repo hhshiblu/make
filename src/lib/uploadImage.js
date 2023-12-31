@@ -4,7 +4,8 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import os from "os";
-import cloudinary from "./cloudinary";
+
+import cloudinary from "cloudinary";
 
 export async function savePhotoLocal(formData) {
   const multibuffer = formData.map((file) =>
@@ -22,6 +23,12 @@ export async function savePhotoLocal(formData) {
   );
   return await Promise.all(multibuffer);
 }
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 export async function uploadImagesToCloudinary(newFiles) {
   const multiplePhotos = newFiles.map((file) =>
