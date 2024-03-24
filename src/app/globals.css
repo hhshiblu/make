@@ -25,3 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+}
